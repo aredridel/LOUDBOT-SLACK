@@ -44,7 +44,7 @@ var LOUDBOT = module.exports = function LOUDBOT()
 
 	THIS.WEB = new SLACK.WebClient(process.env.SLACK_API_TOKEN);
 	THIS.LOAD_EMOJI();
-	THIS.RTM = new SLACK.RtmClient(process.env.SLACK_API_TOKEN, {logLevel: 'warn'});
+	THIS.RTM = new SLACK.RtmClient(process.env.SLACK_BOT_TOKEN, {logLevel: 'warn'});
 	THIS.RTM.on(RTM_EVENTS.MESSAGE, function(DATA) { THIS.LISTENUP(DATA); });
 	THIS.RTM.on('error', function(INFRACTION) { LOG('RTM', INFRACTION); });
 };
@@ -385,6 +385,7 @@ if (require.main === module)
 	require('dotenv').config({silent: true});
 	var ASSERT = require('assert');
 	ASSERT(process.env.SLACK_API_TOKEN, 'YOU MUST PROVIDE A SLACK API TOKEN IN THE ENVIRONMENT VARIABLE SLACK_API_TOKEN.');
+	ASSERT(process.env.SLACK_BOT_TOKEN, 'YOU MUST PROVIDE A SLACK BOT TOKEN IN THE ENVIRONMENT VARIABLE SLACK_BOT_TOKEN.');
 
 	var LOUDIE = new LOUDBOT();
 	LOUDIE.GOGOGO();
