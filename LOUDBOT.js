@@ -46,7 +46,7 @@ var LOUDBOT = module.exports = function LOUDBOT()
 	THIS.LOAD_EMOJI();
 	THIS.RTM = new SLACK.RtmClient(process.env.SLACK_API_TOKEN, {logLevel: 'warn'});
 	THIS.RTM.on(RTM_EVENTS.MESSAGE, function(DATA) { THIS.LISTENUP(DATA); });
-	THIS.RTM.on('error', function(INFRACTION) { LOG(INFRACTION); });
+	THIS.RTM.on('error', function(INFRACTION) { LOG('RTM', INFRACTION); });
 };
 
 LOUDBOT.prototype.LOAD_EMOJI = function LOAD_EMOJI()
